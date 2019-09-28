@@ -1,6 +1,6 @@
 """ MLROSe initialization file."""
 
-# Author: Genevieve Hayes (modified by Andrew Rollings)
+# Author: Genevieve Hayes (modified by Andrew Rollings) (and further modified by Brandon Potocki)
 # License: BSD 3 clause
 
 from .algorithms import (hill_climb, random_hill_climb, simulated_annealing,

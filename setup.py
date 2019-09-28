@@ -15,14 +15,14 @@ def readme():
         return _file.read()
 
 
-setup(name='mlrose-hiive',
+setup(name='mlrose-bpotocki',
       version='1.2.0-ga',
       description="MLROSe: Machine Learning, Randomized Optimization and"
       + " Search",
       long_description=readme(),
       long_description_content_type='text/markdown',
-      url='https://github.com/hiive/mlrose',
-      author='Genevieve Hayes (modifed by Andrew Rollings)',
+      url='https://github.com/brandonpotocki/mlrose',
+      author='Genevieve Hayes (modifed by Andrew Rollings) (and further modified by Brandon Potocki)',
       license='BSD',
       classifiers=[
           "Intended Audience :: Education",

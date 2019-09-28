@@ -8,7 +8,7 @@ from sklearn.metrics import mutual_info_score
 from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import minimum_spanning_tree, depth_first_tree
 
-from mlrose.crossover import TSPCrossOver, UniformCrossOver
+from mlrose.crossover import TSPCrossOver, UniformCrossOver, OnePointCrossOver
 from mlrose.mutator import SwapMutator, ChangeOneMutator
 from .fitness import TravellingSales, Knapsack, FlipFlop, Queens
 
@@ -286,7 +286,14 @@ class DiscreteOpt(OptProb):
         self.sample_order = []
         self.prob_type = 'discrete'
 
-        self._crossover = UniformCrossOver(self) if crossover is None else crossover
+        if crossover == "Uniform":
+            self._crossover = UniformCrossOver(self)
+        elif crossover == "OnePoint":
+            self._crossover = OnePointCrossOver(self)
+        elif crossover is None:
+            self._crossover = UniformCrossOver(self)
+        else:
+            self._crossover = crossover
         self._mutator = SwapMutator(self) if mutator is None else mutator
 
     def eval_node_probs(self):

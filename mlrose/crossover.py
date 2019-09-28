@@ -24,6 +24,18 @@ class UniformCrossOver(_CrossOverBase):
         return child
 
 
+class OnePointCrossOver(_CrossOverBase):
+    def __init__(self, opt_prob):
+        super().__init__(opt_prob)
+
+    def mate(self, p1, p2):
+        bs = np.random.randint(self._length)
+        child = np.array([0] * self._length)
+        for i in range(self._length):
+            child[i] = p1[i] if (i<=bs) else p2[i]
+        return child
+
+
 class TSPCrossOver(_CrossOverBase):
 
     def __init__(self, opt_prob):

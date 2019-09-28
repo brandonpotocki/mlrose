@@ -1,6 +1,34 @@
 # mlrose: Machine Learning, Randomized Optimization and SEarch
 mlrose is a Python package for applying some of the most common randomized optimization and search algorithms to a range of different optimization problems, over both discrete- and continuous-valued parameter spaces.
 
+## Key Differences in this Fork
+- Added OnePointCrossOver
+	- Crossover method can be selected manually with DiscreteOpt crossover parameter of "OnePoint" or "Uniform" (default).
+- Modified semantics of "attempts", "iterations", and "restarts" for the following algorithms:
+	- random_hill_climb
+		- The original code treated "restarts" as forced repetitions of the entire algorithm.
+		- My change ignores the "restarts" parameter and allows the algorithm to restart on its own as it gets stuck at an optima.
+		- Within each iteration, "max_attempts" is used to determine how many times to test a random neighbor for betterness before giving up and restarting.
+		- The algorithm will run for the exact number of iterations specified by "max_iters".
+	- simulated_annealing
+		- My code removes the usage of "max_attempts".
+		- Each random neighbor selection (and possible movement to it) is considered a single iteration.
+		- The algorithm will run for the exact number of iterations specified by "max_iters".
+	- genetic_alg
+		- The original code would try up to "max_attempts" different generated populations per iteration in hopes of finding a better one.
+		- My code removes the usage of "max_attempts".
+		- Each generation is considered a single iteration, regardless of whether it is better than the previous.
+		- The algorithm will run for the exact number of iterations specified by "max_iters".
+	- mimic
+		- The original code would try up to "max_attempts" different sample populations per iteration in hopes of finding a better one.
+		- My code removes the usage of "max_attempts".
+		- The generation of a new sample population is considered a single iteration, regardless of whether it is better than the previous.
+		- The algorithm will run for the exact number of iterations specified by "max_iters".
+- Misc Notes
+	- There is still potentially a lot of code referencing some of the disregarded variables.
+	- There is no guarantee that the "generators" and "runners" will continue to function as intended. I haven't used or tested them.
+
+
 ## Project Background
 mlrose was initially developed to support students of Georgia Tech's OMSCS/OMSA offering of CS 7641: Machine Learning.
 
